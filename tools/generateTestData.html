@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="vi">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Tạo File Test Data - External Sorting</title>
+		<style>
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				font-family:
+					"Inter",
+					-apple-system,
+					BlinkMacSystemFont,
+					"Segoe UI",
+					Roboto,
+					sans-serif;
+				background: linear-gradient(135deg, #0a0a0f 0%, #1a1a25 100%);
+				color: #f1f5f9;
+				min-height: 100vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 2rem;
+			}
+
+			.container {
+				background: rgba(255, 255, 255, 0.05);
+				backdrop-filter: blur(20px);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				border-radius: 1rem;
+				padding: 2rem;
+				max-width: 500px;
+				width: 100%;
+				box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+			}
+
+			h1 {
+				font-size: 1.5rem;
+				margin-bottom: 0.5rem;
+				background: linear-gradient(135deg, #6366f1, #8b5cf6);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+
+			.subtitle {
+				color: #94a3b8;
+				margin-bottom: 1.5rem;
+			}
+
+			.form-group {
+				margin-bottom: 1.5rem;
+			}
+
+			label {
+				display: block;
+				margin-bottom: 0.5rem;
+				color: #94a3b8;
+				font-size: 0.9rem;
+			}
+
+			input[type="number"] {
+				width: 100%;
+				padding: 0.75rem 1rem;
+				background: rgba(255, 255, 255, 0.05);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				border-radius: 0.5rem;
+				color: #f1f5f9;
+				font-size: 1rem;
+				transition: border-color 0.2s;
+			}
+
+			input[type="number"]:focus {
+				outline: none;
+				border-color: #6366f1;
+			}
+
+			select {
+				width: 100%;
+				padding: 0.75rem 1rem;
+				background: rgba(255, 255, 255, 0.1);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				border-radius: 0.5rem;
+				color: #f1f5f9;
+				font-size: 1rem;
+			}
+
+			.btn {
+				width: 100%;
+				padding: 0.875rem 1.5rem;
+				font-size: 1rem;
+				font-weight: 500;
+				border: none;
+				border-radius: 0.5rem;
+				cursor: pointer;
+				transition: all 0.2s;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.5rem;
+			}
+
+			.btn-primary {
+				background: linear-gradient(135deg, #6366f1, #8b5cf6);
+				color: white;
+				box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+			}
+
+			.btn-primary:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+			}
+
+			.btn-secondary {
+				background: rgba(255, 255, 255, 0.1);
+				color: #f1f5f9;
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				margin-top: 1rem;
+			}
+
+			.btn-secondary:hover {
+				background: rgba(255, 255, 255, 0.15);
+			}
+
+			.preview {
+				margin-top: 1.5rem;
+				padding: 1rem;
+				background: rgba(0, 0, 0, 0.2);
+				border-radius: 0.5rem;
+				border: 1px solid rgba(255, 255, 255, 0.05);
+			}
+
+			.preview-title {
+				font-size: 0.85rem;
+				color: #6366f1;
+				margin-bottom: 0.75rem;
+			}
+
+			.preview-data {
+				font-family: "Consolas", "Monaco", monospace;
+				font-size: 0.8rem;
+				color: #94a3b8;
+				max-height: 150px;
+				overflow-y: auto;
+				word-wrap: break-word;
+			}
+
+			.info-box {
+				background: rgba(99, 102, 241, 0.1);
+				border-left: 3px solid #6366f1;
+				padding: 1rem;
+				border-radius: 0 0.5rem 0.5rem 0;
+				margin-bottom: 1.5rem;
+			}
+
+			.info-box p {
+				font-size: 0.85rem;
+				color: #94a3b8;
+			}
+
+			.back-link {
+				display: block;
+				text-align: center;
+				margin-top: 1.5rem;
+				color: #6366f1;
+				text-decoration: none;
+			}
+
+			.back-link:hover {
+				text-decoration: underline;
+			}
+			.back-link:hover {
+				text-decoration: underline;
+			}
+
+			.test-cases-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 0.75rem;
+				margin-bottom: 0.5rem;
+			}
+
+			.btn-test-case {
+				padding: 0.5rem;
+				background: rgba(255, 255, 255, 0.05);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				border-radius: 0.5rem;
+				color: #94a3b8;
+				font-size: 0.85rem;
+				cursor: pointer;
+				transition: all 0.2s;
+				text-align: left;
+			}
+
+			.btn-test-case:hover {
+				background: rgba(99, 102, 241, 0.1);
+				border-color: #6366f1;
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>🔢 Tạo File Test Data</h1>
+			<p class="subtitle">Tạo file nhị phân chứa số thực để test</p>
+
+			<div class="info-box">
+				<p>
+					File được tạo sẽ chứa các số thực (8 bytes/double) ở dạng nhị phân,
+					phù hợp để test ứng dụng Sắp Xếp Ngoại.
+				</p>
+			</div>
+
+			<div class="form-group">
+				<label for="elementCount">Số lượng phần tử:</label>
+				<input type="number" id="elementCount" value="20" min="5" max="1000" />
+			</div>
+
+			<div class="form-group">
+				<label for="dataType">Loại dữ liệu:</label>
+				<select id="dataType">
+					<option value="random">Số ngẫu nhiên (0 - 100)</option>
+					<option value="random_float">Số thực ngẫu nhiên (-100 - 100)</option>
+					<option value="reverse">Sắp xếp ngược (giảm dần)</option>
+					<option value="nearly_sorted">Gần như đã sắp xếp</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label>Test Cases Mẫu:</label>
+				<div class="test-cases-grid">
+					<button class="btn-test-case" data-count="20" data-type="random">
+						🎲 Nhỏ (20 Random)
+					</button>
+					<button class="btn-test-case" data-count="20" data-type="reverse">
+						📉 Nhỏ (20 Ngược)
+					</button>
+					<button
+						class="btn-test-case"
+						data-count="30"
+						data-type="nearly_sorted"
+					>
+						📊 Test Visualization (30 Gần xếp)
+					</button>
+					<button class="btn-test-case" data-count="100" data-type="random">
+						🚀 Lớn (100 Random)
+					</button>
+				</div>
+			</div>
+
+			<button class="btn btn-primary" id="generateBtn">
+				<span>📁</span> Tạo và Tải Xuống
+			</button>
+
+			<button class="btn btn-secondary" id="previewBtn">
+				<span>👁</span> Xem Trước Dữ Liệu
+			</button>
+
+			<div class="preview" id="previewSection" style="display: none">
+				<div class="preview-title">Xem trước dữ liệu:</div>
+				<div class="preview-data" id="previewData"></div>
+			</div>
+
+			<a href="../index.html" class="back-link">← Quay lại ứng dụng chính</a>
+		</div>
+
+		<script>
+			/**
+			 * Tạo dữ liệu test dựa trên số lượng và loại yêu cầu.
+			 *
+			 * @param {number} count - Số lượng phần tử cần tạo.
+			 * @param {string} type - Loại dữ liệu (random, sorted, reverse, etc.).
+			 * @returns {number[]} - Mảng dữ liệu đã tạo.
+			 */
+			function generateData(count, type) {
+				const data = [];
+
+				switch (type) {
+					case "random":
+						for (let i = 0; i < count; i++) {
+							data.push(Math.floor(Math.random() * 100));
+						}
+						break;
+
+					case "random_float":
+						for (let i = 0; i < count; i++) {
+							data.push(Math.random() * 200 - 100);
+						}
+						break;
+
+					case "reverse":
+						for (let i = count; i > 0; i--) {
+							data.push(i);
+						}
+						break;
+
+					case "nearly_sorted":
+						for (let i = 1; i <= count; i++) {
+							data.push(i);
+						}
+						// Hoán đổi ngẫu nhiên 10% số phần tử
+						const swapCount = Math.floor(count * 0.1);
+						for (let i = 0; i < swapCount; i++) {
+							const idx1 = Math.floor(Math.random() * count);
+							const idx2 = Math.floor(Math.random() * count);
+							[data[idx1], data[idx2]] = [data[idx2], data[idx1]];
+						}
+						break;
+				}
+
+				return data;
+			}
+
+			/**
+			 * Tải xuống dữ liệu dưới dạng file nhị phân (Float64).
+			 *
+			 * @param {number[]} data - Mảng dữ liệu số thực.
+			 * @param {string} filename - Tên file muốn lưu.
+			 */
+			function downloadBinaryFile(data, filename) {
+				const float64Array = new Float64Array(data);
+				const blob = new Blob([float64Array.buffer], {
+					type: "application/octet-stream",
+				});
+
+				const url = URL.createObjectURL(blob);
+				const a = document.createElement("a");
+				a.href = url;
+				a.download = filename;
+				document.body.appendChild(a);
+				a.click();
+				document.body.removeChild(a);
+				URL.revokeObjectURL(url);
+			}
+
+			document.getElementById("generateBtn").addEventListener("click", () => {
+				const count = parseInt(document.getElementById("elementCount").value);
+				const type = document.getElementById("dataType").value;
+
+				if (count < 5 || count > 1000) {
+					alert("Số lượng phần tử phải từ 5 đến 1000");
+					return;
+				}
+
+				const data = generateData(count, type);
+				const filename = `test_data_${count}_${type}.bin`;
+
+				downloadBinaryFile(data, filename);
+
+				console.log("Generated data:", data);
+			});
+
+			document.getElementById("previewBtn").addEventListener("click", () => {
+				const count = parseInt(document.getElementById("elementCount").value);
+				const type = document.getElementById("dataType").value;
+
+				if (count < 5 || count > 1000) {
+					alert("Số lượng phần tử phải từ 5 đến 1000");
+					return;
+				}
+
+				const data = generateData(count, type);
+
+				const previewSection = document.getElementById("previewSection");
+				const previewData = document.getElementById("previewData");
+
+				previewSection.style.display = "block";
+				previewData.textContent = data
+					.map((v, i) => `[${i}] ${v.toFixed(2)}`)
+					.join(", ");
+			});
+
+			// Xử lý sự kiện click cho các nút Test Case mẫu
+			document.querySelectorAll(".btn-test-case").forEach((btn) => {
+				btn.addEventListener("click", (e) => {
+					const count = e.target.closest(".btn-test-case").dataset.count;
+					const type = e.target.closest(".btn-test-case").dataset.type;
+
+					document.getElementById("elementCount").value = count;
+					document.getElementById("dataType").value = type;
+
+					// Hiệu ứng visual để báo hiệu đã chọn
+					const originalText = e.target.innerText;
+					e.target.innerText = "✅ Đã chọn!";
+					setTimeout(() => {
+						e.target.innerText = originalText;
+					}, 1000);
+				});
+			});
+		</script>
+	</body>
+</html>

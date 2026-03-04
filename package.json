@@ -1,0 +1,19 @@
+{
+  "name": "tao-ung-dung-minh-hoa-sap-xep-ngoai",
+  "version": "1.0.0",
+  "description": "Ứng dụng web được xây dựng để minh họa trực quan quá trình sắp xếp ngoại (External Sort) trên các tập dữ liệu lớn không thể chứa hết trong bộ nhớ (RAM). Phiên bản V2 được thiết kế lại với giao diện hiện đại, tối ưu trải nghiệm người dùng theo quy trình 3 bước (Cấu hình -> Minh họa -> Kết quả).",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.58.1"
+  }
+}
